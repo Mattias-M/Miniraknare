@@ -29,6 +29,7 @@ namespace Miniraknare
         {
             if (e.Source is Button button)
             {
+                List<string> historyList = new List<string>();
                 switch (button.Content)
                 {
 
@@ -48,6 +49,7 @@ namespace Miniraknare
                     case "*":
 
                         textblock.Text += button.Content;
+                        historyList.Add ((string)button.Content);
                         break;
                     case "=":
                         textblock.Text += button.Content;
@@ -72,6 +74,14 @@ namespace Miniraknare
                     case "AC":
                         textblock.Text = "";
                         break;
+                    case "√":
+                        textblock.Text = square(textblock.Text);
+                        break;
+                    case "H":
+                        historyPriter(historyList);
+                        break;
+
+
 
 
                 }
@@ -82,10 +92,10 @@ namespace Miniraknare
 
         public String calculation(char countingSign)
         {
-            var listText = textblock.Text.Split('+', '-', '/', '*' );
+            var listText = textblock.Text.Split('+', '-', '/', '*', '=');
 
             var firstNumber = Convert.ToDouble(listText[0]);
-            var secondNuber = (listText[1]);
+            var secondNuber = Convert.ToDouble(listText[1]);
 
             var result = 0.0;
             switch (countingSign)
@@ -110,6 +120,24 @@ namespace Miniraknare
             return resultString;
         }
         
+        public string square(string stringNubers)
+        {
+            var nubers = Convert.ToDouble(stringNubers);
+            Math.Sqrt(nubers);
+            string resultStringMathSqrt = Convert.ToString(nubers);
+            return resultStringMathSqrt;
+        }
+        
+        public void historyPriter(List<string> nubers)
+        {
+            foreach (String s in nubers)
+            {
+                 s.ToString();
+                textblock.Text += s;
+            }
+        }
+        
+ 
 
 
 
